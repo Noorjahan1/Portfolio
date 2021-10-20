@@ -1,40 +1,59 @@
 <?php
 // define variables and set to empty values
-$name = $email = $gender = $comment = $website = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $typeHeader=$_POST["formname"];
   if(isset($_POST["text"])){
-       $text=$_POST["text"];
+       $textt=$_POST["text"];
   }
   if( isset($_POST["number"])){
-        $number=$_POST["number"];
+        $numberr=$_POST["number"];
+       
   }
   if(isset($_POST["date"])){
-      $date=$_POST["date"];
+      $dat=$_POST["date"];
+      
   }
   
   if( isset($_POST["textarea"])){
       $textarea=$_POST["textarea"];
+      
+  }  
   }
-  
-  
-  
-  
-  
+  if(isset($textt)){
+ echo "<p>$textt</p><input type='text'></input>";
   }
-  if(isset($text)){
- echo "<p>$text</p><input type='text'></input>";
+  if(isset($numberr)){
+   echo "<p>$numberr</p><input type='number'></input>";
   }
-  if(isset($number)){
-   echo "<p>$number</p><input type='number'></input>";
-  }
-  if(isset($date)){
-   echo "<p>$date</p><input type='date'></input>";
+  if(isset($dat)){
+   echo "<p>$dat</p><input type='date'></input>";
   }
   if(isset($textarea)){
    echo "<p>$textarea</p><textarea ></textarea>";
   }
 
 
+// Create connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "formbuilder";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}else{
+  $sql = "INSERT INTO forms (FormName,textName,numberName,dateName,textAraName,id)
+       VALUES ($typeHeader,$textt,$numberr,$dat,$textarea,1)";
+}
+if ($conn->query($sql) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
 ?>

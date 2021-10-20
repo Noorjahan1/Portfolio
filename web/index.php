@@ -19,8 +19,8 @@
         <h3>Form Name</h3>
           <div id="formFields">
           <!-- form fileds -->
-           <form action="generateform.php" method="POST" >
-               <input type="text"></input>
+           <form action="formGenerate.php" method="POST" >
+               <input type="text" name="formname"></input>
                </br>
                <div id="nameOfFormFiled">
 
@@ -53,12 +53,14 @@
           formDiv=document.getElementById("nameOfFormFiled")
           const inp = document.createElement("input");
           inp.setAttribute("type","text")
+          inp.setAttribute("name",type)
           switch(type){
               case "text":
                   para = document.createElement("p");
                   node = document.createTextNode("Text");
                   para.appendChild(node);
                   formDiv.appendChild( para );
+                  
                   formDiv.appendChild(inp);
                    addFormField(type);
              break;

@@ -46,11 +46,13 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }else{
-  $sql = "INSERT INTO forms (FormName,textName,numberName,dateName,textAraName,id)
-       VALUES ($typeHeader,$textt,$numberr,$dat,$textarea,1)";
+  
+  $sql = "INSERT INTO forms (FormName,textName,numberName,dateName,textAraName)
+       VALUES ('$typeHeader','$textt','$numberr','$dat','$textarea')";
 }
 if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
+  header("location:table.php?");
+ 
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
